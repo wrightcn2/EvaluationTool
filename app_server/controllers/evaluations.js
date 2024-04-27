@@ -1,5 +1,28 @@
 const homelist = (req, res) => {
-    res.render('evaluations-list', {title: 'Home'});
+    res.render('evaluations-list', {
+        title: 'Evaluation Tool - evaluate presentations with ease',
+        pageHeader: {
+            title: 'Evaluation Tool',
+            strapline: 'Evaluate projects and presentations with ease!'
+        },
+        evaluations:[{
+            title: 'MEAN Full Stack Final Project',
+            names: ['Christiana Wright'],
+            rating: 4,
+            characteristics: ['Solo Project', 'Computer Science', 'Final'],
+        },{
+            title: 'MEAN Full Statck Final Project',
+            names: ['Simon Holmes', 'Clive Harber'],
+            rating: 3,
+            characteristics: ['Group Project', 'COmputer Science', 'Final Semester Project'],
+
+        }, {
+            title: 'Senior Seminar Final Presentation',
+            names: 'Grace Wright',
+            rating: 2,
+            characteristics: ['Solo Project', 'Research Presentation', 'Research Paper'],
+        }]
+    });
 };
 
 const evaluationInfo = (req, res) => {
