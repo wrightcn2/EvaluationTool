@@ -1,7 +1,7 @@
 @import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lobster', cursive;
+h1, h3, h4, h6 {
+  font-family:'Lobster', cursive;
 }
 
 legend {
@@ -9,8 +9,8 @@ legend {
 }
 
 .navbar {
-  background-color: #c49102;
-  border-color: #c49102;
+  background-color: #7ea172;
+  border-color: #e8dfca;
 }
 
 .navbar-light .navbar-brand {
@@ -32,7 +32,7 @@ legend {
 }
 
 .card {
-  background-color: #707070;
+  background-color: #4f6f52;
   padding: 1rem;
 }
 
@@ -43,13 +43,13 @@ legend {
 
 .banner {
   margin-top: 4em;
-  border-bottom: 1px solid #707070;
+  border-bottom: 1px solid #fff;
   margin-bottom: 1.5em;
   padding-bottom: 0.5em;
 }
 
 .review-header {
-  background-color: #292929;
+  background-color: #555454;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
@@ -61,13 +61,30 @@ legend {
   margin-bottom: 0.5em;
 }
 
-.badge-default, .btn-primary {
-  background-color: #c49102;
-  border-color: #daa520;
+
+.characteristics span.badge.badge-warning {
+    background-color: #f6e27f;
+}
+span.badge.badge-warning {
+  background-color: #f6e27f;
+}
+.badge-default, .btn-primary { 
+  background-color: #1a4d2e;
+  border-color: #292929;
 }
 
 h4 a, h4 a:hover {
   color: #fff;
+}
+
+h5 a, h5 a:hover {
+  color: #292929
+}
+
+h2{
+  font-family: 'Trebuchet MS';
+  text-decoration: underline;
+  color: #e8dfca;
 }
 
 h4 small {
@@ -80,6 +97,11 @@ h1 small {
   color: #aaa;
 }
 
+p.demographic {
+  font-family: 'Courier New', Courier, monospace;
+  color:#f6e27f;
+}
+
 .address {
   margin-bottom: 0.5rem;
 }
@@ -88,7 +110,12 @@ h1 small {
   margin-right: 2px;
 }
 
+i.fas.fa-star{
+    color: #aaa;
+}
+
 p {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-bottom: 0.65rem;
 }
 
@@ -102,6 +129,6 @@ a:hover {
 
 body {
   font-family: "Cabin", Arial, sans-serif;
-  color: #fff;
-  background-color: #444141;
+  color: #e8dfca;
+  background-color: #1a4d2e;
 }

@@ -1,0 +1,155 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1 MEAN Full Stack Final Project
+  .row
+    .col-12.col-lg-9
+      .row
+        .col-12.col-md-12 
+          p.rating Overall Rating:  
+            i.fas.fa-star
+            i.fas.fa-star
+            i.fas.fa-star
+            i.far.fa-star
+            i.far.fa-star
+          p Group Members: Christiana Wright
+          .card.card-primary
+            .card-block
+              h2.card-title Project Characteristics
+              span.badge.badge-warning
+                i.fa.fa-check
+                | &nbsp;Solo Project
+              | &nbsp;
+              span.badge.badge-warning
+                i.fa.fa-check
+                | &nbsp;Computer Science
+              | &nbsp;
+              span.badge.badge-warning
+                i.fa.fa-check
+                | &nbsp;Final
+              | &nbsp;
+          .card.card-primary
+            .card-block
+              h2
+                a(href='/evaluation/demographics') Project Demographics:
+              p.card-text Group Project Members:
+                .col-12
+                  p.demographic This individual was by themselves
+              p.card-text Today's Date: 
+                .col-12
+                  p.demographic 4/26/2024
+              p.card-text Evaluator's Name:
+                .col-12
+                  p.demographic Professor John Snow
+              p.card-text Title of Evaluation:
+                .col-12
+                  p.demographic Evaluation Tool: the app
+          .card.card-primary
+            .card-block
+              h2
+                a(href='/evaluation/content') Project Content:
+              p.card-text Introduction:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Organization Of Content:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Time Frame:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Visual Aid:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Knowledge and Preparation:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+          .card.card-primary
+            .card-block
+              h2
+                a(href='/evaluation/skills') Verbal Skills:
+              p.card-text Enthusiasm and Motivation:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Elocution:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Vocal Pauses:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+          .card.card-primary
+            .card-block
+              h2
+                 a(href='/evaluation/nonverbal') Non-verbal Skills:
+              p.card-text Eye Contact:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+              p.card-text Gestures:  
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+      .row
+        .col-12
+          .card.card-primary.review-card
+            .card-block
+              a.btn.btn-primary.float-right(href='/evaluation/comment/new') Add comment
+              h2.card-title Past comments
+              .row.review
+                .col-12.no-gutters.review-header
+                  span.rating
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.far.fa-star
+                    i.far.fa-star
+                  span.reviewAuthor John Smith
+                  small.reviewTimestamp 16 April 2024
+                .col-12
+                  p Overall great presentation, a couple issues but nothing horrible.
+              .row.review
+                .col-12.no-gutters.review-header
+                  span.rating
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.fas.fa-star
+                    i.far.fa-star
+                    i.far.fa-star
+                  span.reviewAuthor Jane Doe
+                  small.reviewTimestamp 16 April 2024
+                .col-12
+                  p It was okay. The verbal cues need work, but the content was good.
+    .col-12.col-lg-3
+      p.lead
+        | This MEAN Full Stack Project was a final project for the class CS 5780. They were tasked with create another version of the semester project Loc8r.
+      p
+        | If you have any comments or suggestions please leave a comment to help the presenter.

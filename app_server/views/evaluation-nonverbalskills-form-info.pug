@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1= title
+  .row
+    .col-12.col-lg-8
+      p Eye Contact: <br><br>
+      ul
+        li| A Rating of 1 - Speaker does not make eye contact with the audience.<br><br>
+        li| A Rating of 2 - Speaker makes infrequent eye contact with the audience. <br><br>
+        li| A Rating of 3 - Speaker makes frequent eye contact with some of the audience. <br><br> 
+        li| A Rating of 4 - Speaker makes frequent eye contact with the whole audience. <br><br>
+      p Gestures: <br><br>
+      ul
+        li| A Rating of 1 - No hand gestures are used. Speaker is stiff and unnatural. <br><br>
+        li| A Rating of 2 - Speaker uses no hand gestures but is not stiff. <br><br>
+        li| A Rating of 3 - Speaker uses some hand gestures but they do not seem fitting or natural. <br><br> 
+        li| A Rating of 4 - Natural hand gestures are demonstrated throughout the presentation.<br><br>
+             
+      .col-12.col-md-12 
+        button.btn.btn-primary.float-left 
+          a(href="/evaluation/nonverbal") Go Back to Rating         
