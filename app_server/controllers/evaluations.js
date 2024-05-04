@@ -3,6 +3,23 @@ const apiOptions = {
     server: 'http://localhost:3000'
 };
 
+const showError = (req, res, status) =>  {
+    let title = '';
+    let content = '';
+    if (status === 404) {                                                   
+      title = '404, page not found';                                        
+      content = 'Oh dear. Looks like you can\'t find this page. Sorry.';    
+    } else {                                                                
+      title = `${status}, something's gone wrong`;                          
+      content = 'Something, somewhere, has gone just a little bit wrong.';  
+    }
+    res.status(status);                                                     
+    res.render('generic-text', {                                            
+      title,                                                                
+      content                                                               
+    });                                                                     
+  };
+
 const renderHomepage = (req, res, responseBody) => {
     let message = null;
     if (!(responseBody instanceof Array))
@@ -72,9 +89,14 @@ const evaluationInfo = (req, res) => {
     };                                                           
     request(
       requestOptions,
-      (err, response, body) => {
-        console.log(body);
-        renderDetailsPage(req, res, body);                              
+      (err, {statusCode}, body) => {
+        let data = body;
+        if(statusCode === 200)
+        {
+            renderDetailsPage(req, res, data);                              
+        } else {
+            showError(req, res, statusCode);
+        }
       }
     );
 };
