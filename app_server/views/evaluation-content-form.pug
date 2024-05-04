@@ -3,7 +3,7 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Comment on MEAN Full Stack Final Project - Project Content:
+      h1 Rate MEAN Full Stack Final Project - Project Content:
   .row
     .col-12.col-md-12
       form(action="/evaluation", method="get", role="form") 
@@ -54,9 +54,5 @@ block content
               option 3                                                  
               option 2                                                  
               option 1                                                  
-        .form-group.row
-          label.col-sm-5.col-form-label(for="comment") Comment:
-          .col-sm-10
-            textarea#review.form-control(name="comment", rows="5")       
-        button.btn.btn-primary.float-right Add my comment                
+        .form-group.row               
     .col-12.col-md-4

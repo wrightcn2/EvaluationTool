@@ -10,7 +10,6 @@ const ctrlComments = require('../controllers/comments');
 // evaluations
 router                                                        
   .route('/evaluations')                                        
-  .get(ctrlEvaluations.evaluationsList)                 
   .post(ctrlEvaluations.evaluationsCreate);                       
 router                                                        
   .route('/evaluations/:evaluationid')                            

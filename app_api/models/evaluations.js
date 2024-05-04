@@ -39,9 +39,8 @@ const contentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
 });
-const verbalSchema = new mongoose.Schema({
+const skillsSchema = new mongoose.Schema({
   
     ethusiasm: {
         type: Number,
@@ -65,7 +64,6 @@ const nonverbalSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
 });
 const commentSchema = new mongoose.Schema({
     author: String,
@@ -96,7 +94,7 @@ const evaluationSchema = new mongoose.Schema({
     characteristics: [String],
     demographics: [demographicsSchema],
     content: [contentSchema],
-    verbal: [verbalSchema],
+    skills: [skillsSchema],
     nonverbal: [nonverbalSchema],
     comments: [commentSchema]
 });
