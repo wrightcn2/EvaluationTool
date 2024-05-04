@@ -211,7 +211,7 @@ const contentDeleteOne = (req, res) => {
           .json(err);
       }
 
-      if (evaluation.console && evaluation.content.length > 0) {
+      if (evaluation.content && evaluation.content.length > 0) {
         if (!evaluation.content.id(contentid)) {
           return res
             .status(404)

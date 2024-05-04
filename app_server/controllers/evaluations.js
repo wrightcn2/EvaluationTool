@@ -4,7 +4,16 @@ const apiOptions = {
 };
 
 const renderHomepage = (req, res, responseBody) => {
-    //console.log("Response is:", responseBody);
+    let message = null;
+    if (!(responseBody instanceof Array))
+    {
+        message = "API lookup error";
+        responseBody = [];
+    } else {
+        if(!responseBody.length){
+            message = "No evaluations found";
+        }
+    }
     res.render('evaluations-list', {
         title: 'Evaluation Tool - evaluate presentations with ease',
         pageHeader: {
@@ -12,7 +21,8 @@ const renderHomepage = (req, res, responseBody) => {
             strapline: 'Evaluate projects and presentations with ease!'
         },
         sidebar: "Looking for a way to evaluate something with ease? Evaluation Tool helps you do just that. All digital and easy to use! Let EvaluationTool help you assess the things you're looking for.",
-        evaluations: responseBody
+        evaluations: responseBody,
+        message
     });
 };
 
@@ -25,65 +35,48 @@ const homelist = (req, res) => {
     };
     request(
         requestOptions,
-        (err, response, body) => {
+        (err, {statusCode}, body) => {
+            let data = [];
+            if(statusCode === 200 && body.length)
+            {
+                data = body.map( (item) => {
+                    return item;
+                });
+            }
             renderHomepage(req, res, body);
-            console.log("Response is:", req.body);
         }
     );
 };
 
-const evaluationInfo = (req, res) => {
+const renderDetailsPage = (req, res, evaluation) => {
     res.render('evaluation-info', 
     {
-        title: 'MEAN Full Stack Final Project',
+        title: evaluation.title,
         pageHeader: {
-            title: 'Evaluation Tool',
+            title: evaluation.title,
         },
         sidebar: {
             context: 'This MEAN Full Stack Project was a final project for the class CS 5780. They were tasked with create another version of the semester project Loc8r.',
             callToAction: 'If you have any comments or suggestions please leave a comment to help the presenter.'
         },
-        evaluations:
-        {
-            title: 'MEAN Full Stack Final Project',
-            names: ['Christiana Wright'],
-            rating: 4,
-            characteristics: ['Solo Project', 'Computer Science', 'Final'], 
-            demographics: [{
-                    groupMembers: ['This individual was by themselves.'],
-                    date: '4/26/2024',
-                    evaluatorName: 'Professor John Snow',
-                    title_pres: 'Evaluation Tool: the app'
-            }],
-            content: [{
-                introductionRating: 4,
-                organizationRating: 4,
-                timeFrameRating: 4,
-                visualAidRating: 4,
-                preparationRating: 4
-            }],
-            verbal: [{
-                ethusiasmRating: 4,
-                elocutionRating: 4,
-                vocalPausesRating: 4
-            }],
-            nonVerbal: [{
-                eyeContactRating: 4,
-                gesturesRating: 4
-            }],
-            comments: [{
-                author: 'John Smith',
-                rating: 4,
-                timestamp: '16 April 2024',
-                commentText: 'Overall great presentation, a couple issues but nothing horrible.'
-            },{
-                author: 'Jane Doe',
-                rating: 3,
-                timestamp: '16 April 2024',
-                commentText: 'It was okay. The verbal cues need work, but the content was good.'
-            }]
-        }
+        evaluation
     });
+};
+
+const evaluationInfo = (req, res) => {
+    const path = `/api/evaluations/${req.params.evaluationid}`;      
+    const requestOptions = {                                     
+      url: `${apiOptions.server}${path}`,                        
+      method: 'GET',                                             
+      json: {}                                                   
+    };                                                           
+    request(
+      requestOptions,
+      (err, response, body) => {
+        console.log(body);
+        renderDetailsPage(req, res, body);                              
+      }
+    );
 };
 
 const addComment = (req, res) => {

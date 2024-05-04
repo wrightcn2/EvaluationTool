@@ -9,11 +9,13 @@ block content
         small &nbsp;#{pageHeader.strapline}
   .row
     .col-12.col-md-8
+      .error= message 
+
       each evaluation in evaluations 
         .card 
           .card-block 
             h4 
-              a(href="/evaluation")=evaluation.title 
+              a(href=`/evaluation/${evaluation._id}`)=evaluation.title 
               div(style="float: right") Overall Rating: 
                 +outputRating(evaluation.rating)
             p.names=evaluation.names 
