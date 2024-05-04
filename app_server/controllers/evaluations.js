@@ -41,12 +41,12 @@ const evaluationInfo = (req, res) => {
             title: 'MEAN Full Stack Final Project',
             names: ['Christiana Wright'],
             rating: 4,
-            characteristics: ['Solo Project', 'Computer Science', 'Final'],
+            characteristics: ['Solo Project', 'Computer Science', 'Final'], 
             demographics: [{
                     groupMembers: ['This individual was by themselves.'],
                     date: '4/26/2024',
                     evaluatorName: 'Professor John Snow',
-                    title: 'Evaluation Tool: the app'
+                    title_pres: 'Evaluation Tool: the app'
             }],
             content: [{
                 introductionRating: 4,

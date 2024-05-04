@@ -13,7 +13,7 @@ const demographicsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    title: {
+    title_pres: {
         type: String,
         required: true
     }
@@ -42,7 +42,7 @@ const contentSchema = new mongoose.Schema({
 });
 const skillsSchema = new mongoose.Schema({
   
-    ethusiasm: {
+    enthusiasm: {
         type: Number,
         required: true 
     },
