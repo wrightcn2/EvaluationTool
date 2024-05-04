@@ -1,4 +1,10 @@
-const homelist = (req, res) => {
+const request = require('request');
+const apiOptions = {
+    server: 'http://localhost:3000'
+};
+
+const renderHomepage = (req, res, responseBody) => {
+    //console.log("Response is:", responseBody);
     res.render('evaluations-list', {
         title: 'Evaluation Tool - evaluate presentations with ease',
         pageHeader: {
@@ -6,23 +12,24 @@ const homelist = (req, res) => {
             strapline: 'Evaluate projects and presentations with ease!'
         },
         sidebar: "Looking for a way to evaluate something with ease? Evaluation Tool helps you do just that. All digital and easy to use! Let EvaluationTool help you assess the things you're looking for.",
-        evaluations:[{
-            title: 'MEAN Full Stack Final Project',
-            names: ['Christiana Wright'],
-            rating: 4,
-            characteristics: ['Solo Project', 'Computer Science', 'Final'],
-        },{
-            title: 'MEAN Full Statck Final Project',
-            names: ['Simon Holmes', 'Clive Harber'],
-            rating: 3,
-            characteristics: ['Group Project', 'Computer Science', 'Final Semester Project'],
-        }, {
-            title: 'Senior Seminar Final Presentation',
-            names: 'Grace Wright',
-            rating: 2,
-            characteristics: ['Solo Project', 'Research Presentation', 'Research Paper'],
-        }]
+        evaluations: responseBody
     });
+};
+
+const homelist = (req, res) => {
+    const path = '/api/evaluations';
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,
+        method: 'GET',
+        json: {}
+    };
+    request(
+        requestOptions,
+        (err, response, body) => {
+            renderHomepage(req, res, body);
+            console.log("Response is:", req.body);
+        }
+    );
 };
 
 const evaluationInfo = (req, res) => {
