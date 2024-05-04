@@ -6,7 +6,11 @@ const ctrlOthers = require('../controllers/others')
 /* GET home page. */
 router.get('/', ctrlEvaluations.homelist);
 router.get('/evaluation/:evaluationid', ctrlEvaluations.evaluationInfo);
-router.get('/evaluation/:evaluationid/comment/new', ctrlEvaluations.addComment);
+router
+    .route('/evaluation/:evaluationid/comment/new')
+    .get(ctrlEvaluations.addComment)
+    .post(ctrlEvaluations.doAddComment);   
+                
 router.get('/evaluation/:evaluationid/demographics/new', ctrlEvaluations.projectDemographics);
 
 router.get('/evaluation/:evaluationid/content/new', ctrlEvaluations.projectContent);

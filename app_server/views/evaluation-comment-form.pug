@@ -3,10 +3,10 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Comment on MEAN Full Stack Final Project
+      h1= pageHeader.title
   .row
     .col-12.col-md-8
-      form(action="/evaluation", method="get", role="form")               
+      form(action="", method="post", role="form")               
         .form-group.row
           label.col-10.col-sm-2.col-form-label(for="name") Name
           .col-12.col-sm-10
@@ -15,7 +15,6 @@ block content
           label.col-10.col-sm-2.col-form-label(for="rating") Rating
           .col-12.col-sm-2
             select#rating.form-control.input-sm(name="rating")          
-              option 5                                                  
               option 4                                                  
               option 3                                                  
               option 2                                                  

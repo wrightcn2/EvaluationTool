@@ -80,29 +80,46 @@ const renderDetailsPage = (req, res, evaluation) => {
     });
 };
 
-const evaluationInfo = (req, res) => {
-    const path = `/api/evaluations/${req.params.evaluationid}`;      
-    const requestOptions = {                                     
-      url: `${apiOptions.server}${path}`,                        
-      method: 'GET',                                             
-      json: {}                                                   
-    };                                                           
+const renderCommentForm = (req, res, {title}) => {
+    res.render('evaluation-comment-form', {
+        title: `Comment on ${title} with EvaluationTool`,
+        pageHeader: { title: `Add Comment to ${title}` }
+      });
+};
+const getEvaluationInfo = (req, res, callback) => {
+    const path = `/api/evaluations/${req.params.evaluationid}`;
+    const requestOptions = {
+      url: `${apiOptions.server}${path}`,
+      method: 'GET',
+      json: {}
+    };
     request(
       requestOptions,
       (err, {statusCode}, body) => {
-        let data = body;
-        if(statusCode === 200)
-        {
-            renderDetailsPage(req, res, data);                              
+        const data = body;
+        if(statusCode === 200){
+          callback(req, res, data);
         } else {
-            showError(req, res, statusCode);
+          showError(req, res, statusCode);
         }
       }
     );
 };
 
+const evaluationInfo = (req, res) => {
+   getEvaluationInfo(req, res,
+    (req, res, responseData) => renderDetailsPage(req, res, responseData)
+   );
+};
+
 const addComment = (req, res) => {
-    res.render('evaluation-comment-form', {title: 'Add Comment'});
+    getEvaluationInfo(req, res,
+    (req, res, responseData) => renderCommentForm(req, res, responseData)
+    );
+};
+
+const doAddComment = (req, res) => {
+
 };
 
 //Project information
@@ -137,6 +154,7 @@ module.exports = {
     homelist,
     evaluationInfo,
     addComment,
+    doAddComment,
     projectDemographics,
     projectContent,
     projectContentInfo,

@@ -82,7 +82,7 @@ block content
         .col-12
           .card.card-primary.review-card
             .card-block
-              a.btn.btn-primary.float-right(href='/evaluation/comment/new') Add comment
+              a.btn.btn-primary.float-right(href=`/evaluation/${evaluation._id}/comment/new`) Add comment
               h2.card-title Past comments
               each comment in evaluation.comments
                 .row.review
