@@ -1,33 +1,6 @@
 const mongoose = require('mongoose');
 const Eval = mongoose.model('Evaluation');
 
-const doSetAverageRating_Skills = (evaluation) => {                        
-  if (evaluation.skills && evaluation.skills.length > 0) {
-    const count = evaluation.skills.length;
-    const total = evaluation.skills.reduce((acc, {enthusiasm, elocution, vocalPause}) => {    
-      return acc + enthusiasm + elocution + vocalPause;
-    }, 0);
-    const rating = parseInt(total / count).toFixed(2);
-    evaluation.rating = rating;             
-    evaluation.save(err => {                                        
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Average rating updated to ${evaluation.rating}`);
-       }
-     });
-  }
-};
-const updateAverageRating_Skills = (evaluationId) => {                     
-  Eval.findById(evaluationId)
-    .select('rating skills')
-    .exec((err, evaluation) => {
-      if (!err) {
-        doSetAverageRating_Skills(evaluation);
-       }
-     });
-};
-
 const doAddSkills = (req, res, evaluation) => {                    
   if (!evaluation) {
     res
@@ -46,7 +19,6 @@ const doAddSkills = (req, res, evaluation) => {
           .status(400)
           .json(err);
       } else {
-        updateAverageRating_Skills(evaluation._id);                       
         const thisSkills = evaluation.skills.slice(-1).pop();     
         res                                                      
           .status(201)
@@ -168,7 +140,6 @@ const skillsUpdateOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Skills(evaluation._id);
               res                                                       
                 .status(200)
                 .json(thisSkills);
@@ -220,7 +191,6 @@ const skillsDeleteOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Skills(evaluation._id);
               res
                 .status(204)
                 .json(null);

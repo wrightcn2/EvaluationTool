@@ -1,33 +1,6 @@
 const mongoose = require('mongoose');
 const Eval = mongoose.model('Evaluation');
 
-const doSetAverageRating_Nonverbal = (evaluation) => {                        
-  if (evaluation.nonverbal && evaluation.nonverbal.length > 0) {
-    const count = evaluation.nonverbal.length;
-    const total = evaluation.nonverbal.reduce((acc, {eyeContact, gestures}) => {    
-      return acc + eyeContact + gestures;
-    }, 0);
-    const rating = parseInt(total / count).toFixed(2);
-    evaluation.rating = rating;              
-    evaluation.save(err => {                                        
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Average rating updated to ${evaluation.rating}`);
-       }
-     });
-  }
-};
-const updateAverageRating_Nonverbal = (evaluationId) => {                     
-  Eval.findById(evaluationId)
-    .select('rating nonverbal')
-    .exec((err, evaluation) => {
-      if (!err) {
-        doSetAverageRating_Nonverbal(evaluation);
-       }
-     });
-};
-
 const doAddNonverbal = (req, res, evaluation) => {                    
   if (!evaluation) {
     res
@@ -45,7 +18,6 @@ const doAddNonverbal = (req, res, evaluation) => {
           .status(400)
           .json(err);
       } else {
-        updateAverageRating_Nonverbal(evaluation._id);                       
         const thisNonverbal = evaluation.nonverbal.slice(-1).pop();     
         res                                                      
           .status(201)
@@ -165,7 +137,6 @@ const nonverbalUpdateOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Nonverbal(evaluation._id);
               res                                                       
                 .status(200)
                 .json(thisNonverbal);
@@ -216,7 +187,6 @@ const nonverbalDeleteOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Nonverbal(evaluation._id);
               res
                 .status(204)
                 .json(null);

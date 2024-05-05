@@ -94,7 +94,7 @@ const addEvaluation = (req, res) => {
     res.render('evaluation-new', { title: 'Add review' });
 };
 const renderDetailsPage = (req, res, evaluation) => {
-    res.render('evaluation-info', 
+    res.render('evaluation-info',  
     {
         title: evaluation.title,
         pageHeader: {

@@ -1,33 +1,6 @@
 const mongoose = require('mongoose');
 const Eval = mongoose.model('Evaluation');
 
-const doSetAverageRating_Content = (evaluation) => {                        
-  if (evaluation.content && evaluation.content.length > 0) {
-    const count = evaluation.content.length;
-    const total = evaluation.content.reduce((acc, {introduction, organization, timeFrame, visualAid, preparation}) => {    
-      return acc + introduction + organization + timeFrame + visualAid + preparation;
-    }, 0);
-    const rating = parseInt(total / count).toFixed(2);
-    evaluation.rating = rating;             
-    evaluation.save(err => {                                        
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Average rating updated to ${evaluation.rating}`);
-       }
-     });
-  }
-};
-const updateAverageRating_Content = (evaluationId) => {                     
-  Eval.findById(evaluationId)
-    .select('rating content')
-    .exec((err, evaluation) => {
-      if (!err) {
-        doSetAverageRating_Content(evaluation);
-       }
-     });
-};
-
 const doAddContent = (req, res, evaluation) => {                    
   if (!evaluation) {
     res
@@ -48,7 +21,6 @@ const doAddContent = (req, res, evaluation) => {
           .status(400)
           .json(err);
       } else {
-        updateAverageRating_Content(evaluation._id);                       
         const thisContent = evaluation.content.slice(-1).pop();     
         res                                                      
           .status(201)
@@ -172,7 +144,6 @@ const contentUpdateOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Content(evaluation._id);
               res                                                       
                 .status(200)
                 .json(thisContent);
@@ -224,7 +195,6 @@ const contentDeleteOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating_Content(evaluation._id);
               res
                 .status(204)
                 .json(null);

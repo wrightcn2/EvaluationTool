@@ -1,32 +1,6 @@
 const mongoose = require('mongoose');
 const Eval = mongoose.model('Evaluation');
 
-const doSetAverageRating = (evaluation) => {                        
-  if (evaluation.comments && evaluation.comments.length > 0) {
-    const count = evaluation.comments.length;
-    const total = evaluation.comments.reduce((acc, {rating}) => {    
-      return acc + rating;
-    }, 0);
-    evaluation.rating = parseInt(total / count, 10);                
-    evaluation.save(err => {                                        
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`Average rating updated to ${evaluation.rating}`);
-       }
-     });
-  }
-};
-const updateAverageRating = (evaluationId) => {                     
-  Eval.findById(evaluationId)
-    .select('rating comments')
-    .exec((err, evaluation) => {
-      if (!err) {
-        doSetAverageRating(evaluation);
-       }
-     });
-};
-
 const doAddComment = (req, res, evaluation) => {                    
   if (!evaluation) {
     res
@@ -45,7 +19,6 @@ const doAddComment = (req, res, evaluation) => {
           .status(400)
           .json(err);
       } else {
-        updateAverageRating(evaluation._id);                       
         const thisComment = evaluation.comments.slice(-1).pop();     
         res                                                      
           .status(201)
@@ -166,7 +139,6 @@ const commentsUpdateOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating(evaluation._id);
               res                                                       
                 .status(200)
                 .json(thisComment);
@@ -218,7 +190,6 @@ const commentsDeleteOne = (req, res) => {
                 .status(404)
                 .json(err);
             } else {
-              updateAverageRating(evaluation._id);
               res
                 .status(204)
                 .json(null);

@@ -12,3 +12,31 @@ mixin formatDate(dateString)
   - const y = date.getFullYear();                                           
   - const output = `${d} ${m} ${y}`;                                        
   =output 
+
+mixin overallRating(evaluation)
+  - const { content, skills, nonverbal } = evaluation
+  - let totalRating = 0
+  - ['introduction', 'organization', 'timeFrame', 'visualAid', 'preparation', 'enthusiasm', 'elocution', 'vocalPause', 'eyeContact', 'gestures'].forEach(field => {
+      - if (content && content.length) {
+        - content.forEach(item => {
+          - totalRating += item[field] || 0
+        - })
+      - }
+      - if (skills && skills.length) {
+        - skills.forEach(item => {
+          - totalRating += item[field] || 0
+        - })
+      - }
+      - if (nonverbal && nonverbal.length) {
+        - nonverbal.forEach(item => {
+          - totalRating += item[field] || 0
+        - })
+      - }
+  - })
+  - totalRating /= 10
+  - for (let i = 1; i <= totalRating; i++)      
+    i.fas.fa-star
+  - for (let i = totalRating; i < 4; i++)       
+    i.far.fa-star
+
+

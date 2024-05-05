@@ -12,14 +12,11 @@ block content
   .row
     .col-12.col-md-8
       .error= message 
-
       each evaluation in evaluations 
         .card 
           .card-block 
             h4 
               a(href=`/evaluation/${evaluation._id}`)=evaluation.title 
-              div(style="float: right") Overall Rating: 
-                +outputRating(evaluation.rating)
             p.names=evaluation.names 
             .characteristics 
               each characteristic in evaluation.characteristics 
