@@ -110,7 +110,8 @@ const renderDetailsPage = (req, res, evaluation) => {
 const renderCommentForm = (req, res, {title}) => {
     res.render('evaluation-comment-form', {
         title: `Comment on ${title} with EvaluationTool`,
-        pageHeader: { title: `Add Comment to ${title}` }
+        pageHeader: { title: `Add Comment to ${title}` },
+        error: req.query.err
       });
 };
 const renderDemographicsForm = (req, res, {title}) => {
@@ -182,16 +183,25 @@ const doAddComment = (req, res) => {
         method: 'POST',                                         
         json: postdata                                          
     };
-    request(                                                  
-        requestOptions,
-        (err, {statusCode}, body) => {
-            if (statusCode === 201) {                             
-                res.redirect(`/evaluation/${evaluationid}`);            
-            } else {                                              
-                showError(req, res, statusCode);                    
+    if (!postdata.author || !postdata.rating || !postdata.commentText) {    
+        res.redirect(`/evaluation/${evaluationid}/comment/new?err=val`);          
+    } else {  
+        request(                                                  
+            requestOptions,
+            (err, {statusCode}, {name}) => {
+                if (statusCode === 201) {                             
+                    res.redirect(`/evaluation/${evaluationid}`);            
+                } else if( statusCode === 400
+                    && name && name === 'ValidationError')
+                {   
+                    res.redirect(`/evaluation/${evaluationid}/comment/new?err=val`);
+                } else {   
+                    console.log(body);                                           
+                    showError(req, res, statusCode);                    
+                }
             }
-        }
-    );
+        );
+    }
 };
 
 //Project information

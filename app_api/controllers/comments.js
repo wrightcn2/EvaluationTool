@@ -15,6 +15,7 @@ const doAddComment = (req, res, evaluation) => {
     });
     evaluation.save((err, evaluation) => {                           
       if (err) {
+        console.log(err);
         res
           .status(400)
           .json(err);

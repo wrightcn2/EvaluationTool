@@ -66,14 +66,20 @@ const nonverbalSchema = new mongoose.Schema({
     },
 });
 const commentSchema = new mongoose.Schema({
-    author: String,
+    author: {
+        type: String,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,
         min: 0,
         max: 5
     },
-    commentText: String,
+    commentText: {
+        type: String,
+        required: true
+    },
     createdOn: {
         type: Date,
         'default': Date.now
