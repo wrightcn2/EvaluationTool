@@ -4,7 +4,6 @@ const Eval = mongoose.model('Evaluation');
 const evaluationsList = async (req, res) => { 
   try {
     const evaluations = await Eval.find({}).select('_id title names rating characteristics').limit(10);
-    
     res
       .status(200)
       .json(evaluations);
@@ -79,7 +78,7 @@ const evaluationsUpdateOne = (req, res) => {
       }
       evaluation.title = req.body.title;                            
       evaluation.names = req.body.names;                      
-      evaluation.characteristics = req.body.characteristics.split(',');
+      evaluation.characteristics = req.body.characteristics.split(",");
       evaluation.save((err, eval) => {                             
         if (err) {
           res                                                   

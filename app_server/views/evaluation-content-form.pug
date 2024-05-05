@@ -3,53 +3,53 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Rate MEAN Full Stack Final Project - Project Content:
+      h1= pageHeader.title
   .row
     .col-12.col-md-12
-      form(action="/evaluation", method="get", role="form") 
+      form(action="", method="post", role="form") 
         .form-group.row 
           h4
             a(href='/evaluation/content/info') More Information                                 
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="rating") Rating for Introduction
+          label.col-10.col-sm-2.col-form-label(for="introduction") Rating for Introduction
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="introduction")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="rating") Rating for Organization of Content
+          label.col-10.col-sm-2.col-form-label(for="organization") Rating for Organization of Content
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="organization")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="rating") Rating for Time Frame
+          label.col-10.col-sm-2.col-form-label(for="timeFrame") Rating for Time Frame
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="timeFrame")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="rating") Rating for Visual Aid
+          label.col-10.col-sm-2.col-form-label(for="visualAid") Rating for Visual Aid
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="visualAid")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="rating") Rating for Knowledge and Preparation
+          label.col-10.col-sm-2.col-form-label(for="preparation") Rating for Knowledge and Preparation
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="preparation")          
               option 4                                                  
               option 3                                                  
               option 2                                                  

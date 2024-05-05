@@ -18,7 +18,7 @@ const showError = (req, res, status) =>  {
       title,                                                                
       content                                                               
     });                                                                     
-  };
+};
 
 const renderHomepage = (req, res, responseBody) => {
     let message = null;
@@ -43,7 +43,7 @@ const renderHomepage = (req, res, responseBody) => {
     });
 };
 
-const homelist = (req, res) => {
+const getHomelist = (req, res) => {
     const path = '/api/evaluations';
     const requestOptions = {
         url: `${apiOptions.server}${path}`,
@@ -64,7 +64,35 @@ const homelist = (req, res) => {
         }
     );
 };
+const doAddEvaluation = (req, res) => {
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/`; 
+    console.log(req.body);
+    const postdata = { 
+        title: req.body.title,                                  
+        names: req.body.names, 
+        characteristics: req.body.characteristics                             
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
+};
 
+const addEvaluation = (req, res) => {
+    res.render('evaluation-new', { title: 'Add review' });
+};
 const renderDetailsPage = (req, res, evaluation) => {
     res.render('evaluation-info', 
     {
@@ -79,11 +107,34 @@ const renderDetailsPage = (req, res, evaluation) => {
         evaluation
     });
 };
-
 const renderCommentForm = (req, res, {title}) => {
     res.render('evaluation-comment-form', {
         title: `Comment on ${title} with EvaluationTool`,
         pageHeader: { title: `Add Comment to ${title}` }
+      });
+};
+const renderDemographicsForm = (req, res, {title}) => {
+    res.render('evaluation-demographics-form', {
+        title: `Add Demographics to ${title} with EvaluationTool`,
+        pageHeader: { title: `Add Demographics to ${title}` }
+      });
+};
+const renderContentForm = (req, res, {title}) => {
+    res.render('evaluation-content-form', {
+        title: `Rate Content of ${title} with EvaluationTool`,
+        pageHeader: { title: `Add Content Ratings to ${title}` }
+      });
+};
+const renderSkillsForm = (req, res, {title}) => {
+    res.render('evaluation-verbalskills-form', {
+        title: `Rate Verbal Skills on ${title} with EvaluationTool`,
+        pageHeader: { title: `Rate Verbal Skills on ${title}` }
+      });
+};
+const renderNonverbalForm = (req, res, {title}) => {
+    res.render('evaluation-nonverbalskills-form', {
+        title: `Rate Nonverbal Skills on ${title} with EvaluationTool`,
+        pageHeader: { title: `Rate Nonverbal Skills on ${title}` }
       });
 };
 const getEvaluationInfo = (req, res, callback) => {
@@ -119,30 +170,159 @@ const addComment = (req, res) => {
 };
 
 const doAddComment = (req, res) => {
-
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/${evaluationid}/comments`; 
+    const postdata = { 
+        author: req.body.name,                                  
+        rating: parseInt(req.body.rating, 10),                  
+        commentText: req.body.comment                             
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/evaluation/${evaluationid}`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
 };
 
 //Project information
-const projectDemographics = (req, res) => {
-    res.render('evaluation-demographics-form', {title: 'Add Project Demographics'});
+const addDemographics = (req, res) => {
+    getEvaluationInfo(req, res,
+        (req, res, responseData) => renderDemographicsForm(req, res, responseData)
+    );
+};
+const doAddDemographics = (req, res) => {
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/${evaluationid}/demographics`; 
+    const postdata = { 
+        groupMembers: req.body.groupMembers,                                  
+        date: req.body.date,                  
+        evaluatorName: req.body.evaluatorName,
+        title_pres: req.body.title_pres                             
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/evaluation/${evaluationid}`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
 };
 
-const projectContent = (req, res) => {
-    res.render('evaluation-content-form', {title: 'Add Project Content'});
+
+const addContent = (req, res) => {
+    getEvaluationInfo(req, res,
+        (req, res, responseData) => renderContentForm(req, res, responseData)
+    );
+};
+const doAddContent = (req, res) => {
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/${evaluationid}/content`; 
+    const postdata = { 
+        introduction: req.body.introduction,                                  
+        organization: req.body.organization,                  
+        timeFrame: req.body.timeFrame,
+        visualAid: req.body.visualAid,
+        preparation: req.body.preparation                             
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/evaluation/${evaluationid}`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
 };
 const projectContentInfo = (req, res) => {
-    res.render('evaluation-content-form-info', {title: 'Read Project Content Information'});
+    res.render('evaluation-content-form-info', {title: 'Read Content Information'});
 };
 
-const verbalSkills = (req, res) => {
-    res.render('evaluation-verbalskills-form', {title: 'Add Verbal Skills'});
+const addSkills = (req, res) => {
+    getEvaluationInfo(req, res,
+        (req, res, responseData) => renderSkillsForm(req, res, responseData)
+    );
+};
+const doAddSkills = (req, res) => {
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/${evaluationid}/skills`; 
+    const postdata = { 
+        enthusiasm: req.body.enthusiasm,                                  
+        elocution: req.body.elocution,                  
+        vocalPause: req.body.vocalPause,
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/evaluation/${evaluationid}`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
 };
 const verbalSkillsInfo = (req, res) => {
     res.render('evaluation-verbalskills-form-info', {title: 'Read Verbal Skills Information'});
 };
 
-const nonverbalSkills = (req, res) => {
-    res.render('evaluation-nonverbalskills-form', {title: 'Add Non-verbal Skills'});
+const addNonverbal = (req, res) => {
+    getEvaluationInfo(req, res,
+        (req, res, responseData) => renderNonverbalForm(req, res, responseData)
+    );
+};
+const doAddNonverbal = (req, res) => {
+    const evaluationid = req.params.evaluationid;                 
+    const path = `/api/evaluations/${evaluationid}/nonverbal`; 
+    const postdata = { 
+        eyeContact: req.body.eyeContact,                                  
+        gestures: req.body.gestures                 
+                                 
+    };                                                        
+    const requestOptions = {
+        url: `${apiOptions.server}${path}`,                     
+        method: 'POST',                                         
+        json: postdata                                          
+    };
+    request(                                                  
+        requestOptions,
+        (err, {statusCode}, body) => {
+            if (statusCode === 201) {                             
+                res.redirect(`/evaluation/${evaluationid}`);            
+            } else {                                              
+                showError(req, res, statusCode);                    
+            }
+        }
+    );
 };
 const nonverbalSkillsInfo = (req, res) => {
     res.render('evaluation-nonverbalskills-form-info', {title: 'Read Non-verbal Skills Information'});
@@ -151,15 +331,21 @@ const nonverbalSkillsInfo = (req, res) => {
 
 
 module.exports = {
-    homelist,
+    getHomelist,
     evaluationInfo,
+    addEvaluation,
+    doAddEvaluation,
     addComment,
     doAddComment,
-    projectDemographics,
-    projectContent,
+    addDemographics,
+    doAddDemographics,
+    addContent,
+    doAddContent,
     projectContentInfo,
-    verbalSkills,
+    addSkills,
+    doAddSkills,
     verbalSkillsInfo,
-    nonverbalSkills,
+    addNonverbal,
+    doAddNonverbal,
     nonverbalSkillsInfo
 }

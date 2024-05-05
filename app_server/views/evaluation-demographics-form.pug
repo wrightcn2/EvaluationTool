@@ -3,32 +3,32 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Add info to MEAN Full Stack Final Project - Project Demographics:
+      h1= pageHeader.title
   .row
     .col-12.col-md-12
-      form(action="/evaluation", method="get", role="form")   
+      form(action="", method="post", role="form")   
         .form-group.row
-          label.col-10.col-sm-3.col-form-label(for="information") Group Project Members:
+          label.col-10.col-sm-3.col-form-label(for="groupMembers") Group Project Members:
           .col-sm-8
-            textarea#review.form-control(name="comment", rows="1")  
+            textarea#review.form-control(name="groupMembers", rows="1")  
         .form-group.row
 
         .form-group.row
-          label.col-10.col-sm-3.col-form-label(for="information") Today's Date:
+          label.col-10.col-sm-3.col-form-label(for="date") Today's Date:
           .col-sm-8
-            textarea#review.form-control(name="comment", rows="1")  
+            textarea#review.form-control(name="date", rows="1")  
         .form-group.row
 
         .form-group.row
-          label.col-10.col-sm-3.col-form-label(for="information") Evaluator's Name: 
+          label.col-10.col-sm-3.col-form-label(for="evaluatorName") Evaluator's Name: 
           .col-sm-8
-            textarea#review.form-control(name="comment", rows="1") 
+            textarea#review.form-control(name="evaluatorName", rows="1") 
         .form-group.row
 
         .form-group.row
-          label.col-10.col-sm-3.col-form-label(for="information") Title of Evaluation: 
+          label.col-10.col-sm-3.col-form-label(for="title_pres") Title of Evaluation: 
           .col-sm-8
-            textarea#review.form-control(name="comment", rows="1")  
+            textarea#review.form-control(name="title_pres", rows="1")  
         .form-group.row   
         button.btn.btn-primary.float-right Add The Demographics                          
     .col-12.col-md-4

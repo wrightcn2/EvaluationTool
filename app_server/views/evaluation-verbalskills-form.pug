@@ -3,35 +3,35 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Rate MEAN Full Stack Final Project - Verbal Skills:
+      h1= pageHeader.title
   .row
     .col-12.col-md-8
-      form(action="/evaluation", method="get", role="form")
+      form(action="", method="post", role="form")
         .form-group.row 
           h4
             a(href='/evaluation/skills/info') More Information                                  
         .form-group.row
-          label.col-10.col-sm-5.col-form-label(for="rating") Rate Ethusiasm and Motivation
+          label.col-10.col-sm-5.col-form-label(for="enthusiasm") Rate Ethusiasm and Motivation
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="enthusiasm")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-5.col-form-label(for="rating") Rate Elocution
+          label.col-10.col-sm-5.col-form-label(for="elocution") Rate Elocution
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="elocution")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-5.col-form-label(for="rating") Rate Vocal Pauses
+          label.col-10.col-sm-5.col-form-label(for="vocalPause") Rate Vocal Pauses
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="vocalPause")          
               option 4                                                  
               option 3                                                  
               option 2                                                  

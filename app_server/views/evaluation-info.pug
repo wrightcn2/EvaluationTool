@@ -28,8 +28,8 @@ block content
                 | &nbsp;
           .card.card-primary
             .card-block
-              h2
-                a(href=`/evaluation/${evaluation._id}/demographics/new`) Project Demographics:
+              a.btn.btn-primary.float-right(href=`/evaluation/${evaluation._id}/demographics/new`) Add Demographics
+              h2 Project Demographics:
               each demographic in evaluation.demographics
                 p.card-text Group Project Members:
                   .col-12
@@ -45,8 +45,8 @@ block content
                     p.demographic= demographic.title_pres
           .card.card-primary
             .card-block
-              h2
-                a(href='/evaluation/content/new') Project Content:
+              a.btn.btn-primary.float-right(href=`/evaluation/${evaluation._id}/content/new`) Add Content Ratings
+              h2 Project Content:
               each content in evaluation.content
                 p.card-text Introduction: 
                   +outputRating(content.introduction)
@@ -60,8 +60,8 @@ block content
                   +outputRating(content.preparation)
           .card.card-primary
             .card-block
-              h2
-                a(href='/evaluation/skills/new') Verbal Skills:
+              a.btn.btn-primary.float-right(href=`/evaluation/${evaluation._id}/skills/new`) Add Verbal Ratings
+              h2 Verbal Skills:
               each verbal in evaluation.skills
                 p.card-text Enthusiasm and Motivation:  
                   +outputRating(verbal.enthusiasm)
@@ -71,8 +71,8 @@ block content
                   +outputRating(verbal.vocalPause)
           .card.card-primary
             .card-block
-              h2
-                 a(href='/evaluation/nonverbal/new') Non-verbal Skills:
+              a.btn.btn-primary.float-right(href=`/evaluation/${evaluation._id}/nonverbal/new`) Add NonVerbal Ratings
+              h2 Non-verbal Skills:
               each nonVerbal in evaluation.nonverbal
                 p.card-text Eye Contact:  
                   +outputRating(nonVerbal.eyeContact)
@@ -93,7 +93,7 @@ block content
                     small.reviewTimestamp   
                       +formatDate(comment.createdOn)
                   .col-12
-                    p !{(comment.commentText).replace(/\n/g, '<br/>')}
+                    p= comment.commentText
     .col-12.col-lg-3
       p.lead #{evaluation.name} #{sidebar.context}
       p= sidebar.callToAction

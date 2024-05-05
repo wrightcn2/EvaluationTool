@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1 Create new Evaluation!
+  .row
+    .col-12.col-md-12
+      form(action="", method="post", role="form")   
+        .form-group.row
+          label.col-10.col-sm-3.col-form-label(for="title") Title of Evaluation:
+          .col-sm-8
+            textarea#review.form-control(name="title", rows="1")  
+        .form-group.row
+
+        .form-group.row
+          label.col-10.col-sm-3.col-form-label(for="names") Name(s) of Group Members:
+          .col-sm-8
+            textarea#review.form-control(name="names", rows="1")  
+        .form-group.row
+
+        .form-group.row
+          label.col-10.col-sm-3.col-form-label(for="characteristics") Three Characteristics: 
+          .col-sm-8
+            textarea#review.form-control(name="characteristics", rows="1") 
+        .form-group.row
+
+        button.btn.btn-primary.float-right Create Your New Evaluation!                          
+    .col-12.col-md-4
+

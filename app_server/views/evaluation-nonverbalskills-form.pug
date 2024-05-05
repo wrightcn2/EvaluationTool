@@ -3,26 +3,26 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Rate MEAN Full Stack Final Project - Non-verbal Skills:
+      h1= pageHeader.title
   .row
     .col-12.col-md-8
-      form(action="/evaluation", method="get", role="form")
+      form(action="", method="post", role="form")
         .form-group.row 
           h4
             a(href='/evaluation/nonverbal/info') More Information                                  
         .form-group.row
-          label.col-10.col-sm-5.col-form-label(for="rating") Rate Eye Contact
+          label.col-10.col-sm-5.col-form-label(for="eyeContact") Rate Eye Contact
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="eyeContact")          
               option 4                                                  
               option 3                                                  
               option 2                                                  
               option 1                                                  
         .form-group.row
         .form-group.row
-          label.col-10.col-sm-5.col-form-label(for="rating") Rate Gestures:
+          label.col-10.col-sm-5.col-form-label(for="gestures") Rate Gestures:
           .col-12.col-sm-2
-            select#rating.form-control.input-sm(name="rating")          
+            select#rating.form-control.input-sm(name="gestures")          
               option 4                                                  
               option 3                                                  
               option 2                                                  

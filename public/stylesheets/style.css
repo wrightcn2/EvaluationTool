@@ -72,6 +72,11 @@ span.badge.badge-warning {
   background-color: #1a4d2e;
   border-color: #292929;
 }
+.btn-lg {
+  font-size: 1.5rem; /* You can adjust this value as needed */
+  padding: 0.5rem 1rem; /* You can adjust padding to match the size */
+  background-color: #555454;
+}
 
 h4 a, h4 a:hover {
   color: #fff;
